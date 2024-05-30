@@ -1,0 +1,176 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student//結構 
+{
+    char name[15];
+    char   id[15];
+    int math;
+    int physics;
+    int english;
+    float avg;
+};
+
+int main(void)
+{
+	struct student grade[5];//宣告結構變數 
+	int a,b=0,n,i,k,temp=0,ok,f=0;
+	char h,c,j[10];
+
+	printf("設計你自己的封面\n");
+	printf("--------/ \__--\n");
+	printf("-------(    @\___--\n");
+	printf("-------/         O--\n");
+	printf("------/   (_____/--\n");
+	printf("-----/_____/   U--\n");
+	printf("----/        \  /--\n");
+	printf("---/__________\--\n");
+	printf("I'm E1B 43 Wang You Yu\n");
+	printf("-I'm E1B 43 Wang You Yu-\n");
+	printf("--I'm E1B 43 Wang You Yu--\n");
+	printf("---I'm E1B 43 Wang You Yu---\n");
+	printf("----/\_/\----------------\n");
+	printf("---( o.o )-----------------\n");
+	printf("----> ^ <------------------\n");
+	printf("---Wang You Yu-----\n");
+	printf("----Wang You Yu-----\n");
+	printf("-----Wang You Yu-----\n");
+	printf("-----------------/\_/\-------\n");
+	printf("----------------( o.o )------\n");
+	printf("-----------------> ^ <-------\n");
+	//顯示個人風格畫面
+	while(1)//迴圈 (重複)1=true 
+{
+	printf("輸入四位數字");
+	scanf("%d",&a);
+	if (a==2022)
+{
+	break;
+} 
+    else
+{
+ 	printf("錯誤\n");
+ 	b++;	
+}
+	if(b==3)
+	return 0;
+}
+system("pause"); //暫停程式
+	while(1) 
+	{
+	start:
+	system("CLS"); //清除畫面
+	printf("| a.輸入學生成績     |\n");
+	printf("| b.顯示學生成績     |\n");
+	printf("| c.搜尋學生成績     |\n");
+	printf("| d.成績排名         |\n");
+	printf("| e.系統結束         |\n");
+	printf("請輸入一個字元\n");
+	fflush(stdin);
+		scanf("%c",&c);
+		printf("\n");
+		switch(c)
+		{
+			case 'a':
+				system("CLS");
+				printf("請輸入n(5~10)的整數\n");
+				scanf("%d",&n);
+				printf("請輸入學生姓名,學號,數學,物理,英文成績\n");
+				for(i=0;i<n;i++)
+				{
+					scanf("%s",&grade[i].name);//逐一輸入資料 
+					scanf("%s",&grade[i].id);
+					scanf("%d",&grade[i].math);
+					scanf("%d",&grade[i].physics);
+					scanf("%d",&grade[i].english);
+					grade[i].avg=((float)grade[i].math+(float)grade[i].physics+(float)grade[i].english)/3;//計算成績平均值(float) 
+				}
+				system("pause");
+				break;	
+				
+			case 'b':
+				system("CLS");
+				printf("名字    學號    數學    物理    英文    平均\n");
+				for(i=0;i<n;i++)
+				{
+					printf("%5s  %5s  %5d   %5d    %5d     %.1f\n",grade[i].name,grade[i].id,grade[i].math,grade[i].physics,grade[i].english,grade[i].avg);	
+				} 
+				system("pause");
+				system("CLS");
+				break;
+					
+			case 'c':
+				system("CLS");
+				printf("請輸入要搜尋的姓名\n");
+				scanf("%s",&j);
+				printf("名字    學號    數學    物理    英文    平均\n");
+				for(i=0;i<n;i++)
+				{
+					ok=strcmp(j,grade[i].name);//字串函數比對內容 
+					if(ok==0)
+					printf("%5s  %5s  %5d   %5d    %5d     %.1f\n",grade[i].name,grade[i].id,grade[i].math,grade[i].physics,grade[i].english,((float)grade[i].math+(float)grade[i].physics+(float)grade[i].english)/3);
+					else
+					f++;
+					if(f==n)//f=n時找不到資料,跳出警告信息 
+					{
+					printf("error\n");
+					system("pause");
+					system("CLS");
+					break;
+					}
+				}	
+				system("pause");
+				system("CLS");
+				break;
+				
+			case 'd':
+				system("CLS");
+				for(i=0;i<n;i++)//氣泡排序法 
+				{
+					 for(k=i;k<n;k++)
+					 {
+					 	if(grade[k].avg>grade[i].avg) 
+					 	{
+					 	    temp=grade[k].avg;
+                			grade[k].avg=grade[i].avg;
+                			grade[i].avg=temp;
+						}
+					 }
+				}
+				for(i=0;i<n;i++) 
+				{
+        			printf("%5s  %5s  %5d   %5d    %5d     %.1f\n",grade[i].name,grade[i].id,grade[i].math,grade[i].physics,grade[i].english,grade[i].avg);
+    			}
+				system("pause");
+				system("CLS");
+				break;	
+					
+			case 'e'://結束 
+				system("CLS");
+				while(1)
+				{
+					system("CLS");
+					printf("Continue? (y/n)\n");	
+					fflush(stdin);
+					scanf("%c",&h);
+					switch(h)
+					{
+						case 'y':
+							system("pause");
+							break;
+						case 'n':
+							system("pause");
+							return 0;
+						default:
+							printf("錯誤\n");
+							system("pause");
+							goto start;//回到star	
+					}
+					break;	
+				} 
+				break;
+		}
+	}
+}
+//心得:這次的指標與結構作業將前幾個單元統整再一起,利用了氣泡排序法和字串的相關函數練習是個十分有趣的挑戰 
